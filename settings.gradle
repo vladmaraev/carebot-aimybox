@@ -1,0 +1,2 @@
+include ':app', ':nuancetrigger'
+rootProject.name='Smart Screen Assistant'

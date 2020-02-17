@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="?attr/aimybox_responseTheme"
+    app:autoSizeMinTextSize="16sp"
+    app:autoSizeMaxTextSize="42sp"
+    app:autoSizeStepGranularity="2sp"
+    app:autoSizeTextType="uniform"/>

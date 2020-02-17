@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:animateLayoutChanges="true"
+    android:background="@color/black">
+
+    <FrameLayout
+        android:id="@+id/main_container"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.justai.aimybox.smartscreen.ui.AimyboxButton
+        android:id="@+id/aimybox_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="16dp"/>
+
+    <com.justai.aimybox.smartscreen.ui.WaveView
+        android:id="@+id/wave"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-100dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

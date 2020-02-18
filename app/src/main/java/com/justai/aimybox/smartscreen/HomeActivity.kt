@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.justai.aimybox.Aimybox
-import com.justai.aimybox.smartscreen.api.SessionAwareDialogApi
+import com.justai.aimybox.api.aimybox.AimyboxDialogApi
 import com.justai.aimybox.smartscreen.extensions.onRippleClick
 import com.justai.aimybox.smartscreen.fragment.ScreensaverFragment
 import com.justai.aimybox.smartscreen.fragment.AssistantFragment
@@ -80,7 +80,7 @@ class HomeActivity: AppCompatActivity(), CoroutineScope {
     }
 
     private fun resetSession() {
-        val api = viewModel.aimybox.config.dialogApi as? SessionAwareDialogApi
+        val api = viewModel.aimybox.config.dialogApi as? AimyboxDialogApi
         launch {
             api?.resetSession()
         }

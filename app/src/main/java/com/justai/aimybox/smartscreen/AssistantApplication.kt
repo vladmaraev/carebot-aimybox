@@ -3,8 +3,8 @@ package com.justai.aimybox.smartscreen
 import android.app.Application
 import android.content.Context
 import com.justai.aimybox.Aimybox
+import com.justai.aimybox.api.aimybox.AimyboxDialogApi
 import com.justai.aimybox.core.Config
-import com.justai.aimybox.smartscreen.api.SessionAwareDialogApi
 import com.justai.aimybox.smartscreen.skill.DateTimeSkill
 import com.justai.aimybox.speechkit.google.platform.GooglePlatformSpeechToText
 import com.justai.aimybox.speechkit.yandex.cloud.IAmTokenGenerator
@@ -47,7 +47,7 @@ class AssistantApplication: Application() {
             arrayOf(getString(R.string.wakeup_phrase))
         )
 
-        val dialogApi = SessionAwareDialogApi(AIMYBOX_API_KEY, unitId,
+        val dialogApi = AimyboxDialogApi(AIMYBOX_API_KEY, unitId,
             customSkills = linkedSetOf(
                 DateTimeSkill()
             ))

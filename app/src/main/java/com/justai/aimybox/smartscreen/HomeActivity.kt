@@ -1,7 +1,11 @@
 package com.justai.aimybox.smartscreen
 
 import android.Manifest
+import android.content.Context
+import android.media.AudioManager
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -25,11 +29,13 @@ class HomeActivity: AppCompatActivity(), CoroutineScope {
     private lateinit var button: AimyboxButton
     private lateinit var waveView: WaveView
     private lateinit var viewModel: AssistantViewModel
+    private lateinit var audioManager: AudioManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_layout)
 
+        audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val application = application as AssistantApplication
 
         if (!::viewModel.isInitialized) {
@@ -50,7 +56,7 @@ class HomeActivity: AppCompatActivity(), CoroutineScope {
         button = findViewById(R.id.aimybox_button)
         button.observeEvents(viewModel.aimybox)
         button.onRippleClick {
-            viewModel.aimybox.toggleRecognition()
+            toggleRecognition()
         }
 
         requestPermissions()
@@ -67,6 +73,16 @@ class HomeActivity: AppCompatActivity(), CoroutineScope {
         viewModel.aimybox.unmute()
     }
 
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        when {
+            keyCode == 131 -> toggleRecognition()
+            keyCode == 132 -> toggleMute()
+            keyCode == 24 -> audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND)
+            keyCode == 25 -> audioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND)
+        }
+        return true
+    }
+
     override fun onBackPressed() {
         viewModel.aimybox.standby()
         val isVisible = viewModel.isAssistantVisible.value ?: false
@@ -78,6 +94,16 @@ class HomeActivity: AppCompatActivity(), CoroutineScope {
             super.onBackPressed()
         }
     }
+
+    private fun toggleMute() {
+        if (viewModel.aimybox.isMuted) {
+            viewModel.aimybox.unmute()
+        } else {
+            viewModel.aimybox.mute()
+        }
+    }
+
+    private fun toggleRecognition() = viewModel.aimybox.toggleRecognition()
 
     private fun resetSession() {
         val api = viewModel.aimybox.config.dialogApi as? AimyboxDialogApi

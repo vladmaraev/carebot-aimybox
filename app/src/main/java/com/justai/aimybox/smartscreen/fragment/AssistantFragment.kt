@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class AssistantFragment: Fragment(), CoroutineScope {
+class AssistantFragment: Fragment(R.layout.assistant_layout), CoroutineScope {
 
     override val coroutineContext: CoroutineContext = Dispatchers.Main + Job()
 
@@ -70,13 +70,6 @@ class AssistantFragment: Fragment(), CoroutineScope {
         super.onDetach()
         videoPlayer.release()
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) =
-        inflater.inflate(R.layout.assistant_layout, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.apply {

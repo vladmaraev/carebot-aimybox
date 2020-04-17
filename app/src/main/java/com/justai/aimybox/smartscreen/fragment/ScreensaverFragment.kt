@@ -16,15 +16,16 @@ import androidx.lifecycle.ViewModelProviders
 import com.justai.aimybox.Aimybox
 import com.justai.aimybox.smartscreen.AssistantApplication
 import com.justai.aimybox.smartscreen.AssistantViewModel
+import com.justai.aimybox.smartscreen.Preferences
 import com.justai.aimybox.smartscreen.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ScreensaverFragment: Fragment() {
+class ScreensaverFragment: Fragment(R.layout.screensaver_layout) {
 
     companion object {
-        private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-        private val dateFormat = SimpleDateFormat("EEE, dd MMM", Locale.getDefault())
+        private val timeFormat = SimpleDateFormat("HH:mm", Preferences.defaultLocale)
+        private val dateFormat = SimpleDateFormat("EEE, dd MMM", Preferences.defaultLocale)
     }
 
     private val tickReceiver = TickReceiver()
@@ -34,13 +35,6 @@ class ScreensaverFragment: Fragment() {
     private lateinit var dateView: TextView
     private lateinit var promptView: TextView
     private lateinit var videoView: VideoView
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) =
-        inflater.inflate(R.layout.screensaver_layout, container, false)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,8 +59,8 @@ class ScreensaverFragment: Fragment() {
             startVideo()
         }
 
+        clockView.text = timeFormat.format(Date())
         context?.registerReceiver(tickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
-
         viewModel.aimyboxState.observe(viewLifecycleOwner, Observer(::onAimyboxStateChanged))
     }
 

@@ -118,7 +118,7 @@ internal class AimyboxButton @JvmOverloads constructor(
             buttonStartDrawable =
                 getDrawable(R.styleable.AimyboxButton_aimybox_startRecordingDrawable)
             buttonStopDrawable =
-                getDrawable(R.styleable.AimyboxButton_aimybox_stopRecordingDrawable)
+                getDrawable(R.styleable.AimyboxButton_aimybox_startRecordingDrawable)
 
             buttonDrawableExpandedColor =
                 getColor(

@@ -66,6 +66,11 @@ class NuanceVoiceTrigger(
         L.i("Nuance VT stopped")
     }
 
+    override fun destroy() {
+        recognizer.release()
+        audioSource?.stopRecording()
+    }
+
     private fun launchDetection(
         onTriggered: (phrase: String?) -> Unit,
         onException: (e: Throwable) -> Unit

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true"
     android:animateLayoutChanges="true"
-    android:background="@color/black">
+    android:background="@color/colorPrimary">
 
     <FrameLayout
         android:id="@+id/main_container"
@@ -17,17 +17,16 @@
 
     <com.justai.aimybox.smartscreen.ui.AimyboxButton
         android:id="@+id/aimybox_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"/>
 
     <com.justai.aimybox.smartscreen.ui.WaveView
         android:id="@+id/wave"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="200dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-100dp"
+        android:layout_marginBottom="-160dp"
         android:visibility="gone"/>
 
 </RelativeLayout>

@@ -65,13 +65,12 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.1")
 
-    implementation("com.justai.aimybox:core:0.10.0")
-    implementation("com.justai.aimybox:google-platform-speechkit:0.10.0")
-    implementation("com.justai.aimybox:yandex-speechkit:0.10.0")
-    implementation("com.justai.aimybox:components:0.1.9")
+    implementation("com.justai.aimybox:core:0.11.0")
+    implementation("com.justai.aimybox:components:0.1.8")
 
     implementation("com.github.bumptech.glide:glide:4.9.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.9.0")
 
     implementation("com.google.android.exoplayer:exoplayer:2.11.2")
+    implementation("com.yandex.android:speechkit:3.12.2")
 }

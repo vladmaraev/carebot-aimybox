@@ -46,7 +46,7 @@ class AssistantApplication: Application(), CoroutineScope, SharedPreferences.OnS
 
         val speechToText = YandexSpeechToText(context, YANDEX_API_KEY)
 
-        val textToSpeech = YandexTextToSpeech(context, YANDEX_API_KEY, "nick")
+        val textToSpeech = YandexTextToSpeech(context, YANDEX_API_KEY, "oksana")
 
         val trigger = NuanceVoiceTrigger(
             context,

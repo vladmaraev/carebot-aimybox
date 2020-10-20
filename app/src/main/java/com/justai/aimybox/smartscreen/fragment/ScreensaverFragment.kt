@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,7 @@ class ScreensaverFragment: Fragment(R.layout.screensaver_layout) {
     private lateinit var viewModel: AssistantViewModel
     private lateinit var clockView: TextView
     private lateinit var dateView: TextView
-    private lateinit var promptView: TextView
+    //private lateinit var promptView: TextView
     private lateinit var videoView: VideoView
 
     override fun onAttach(context: Context) {
@@ -50,29 +51,28 @@ class ScreensaverFragment: Fragment(R.layout.screensaver_layout) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         view.apply {
-            clockView = findViewById(R.id.time)
-            dateView = findViewById(R.id.date)
-            promptView = findViewById(R.id.prompt)
+            //clockView = findViewById(R.id.time)
+            //dateView = findViewById(R.id.date)
+            //promptView = findViewById(R.id.prompt)
             videoView = findViewById(R.id.video)
-
-            refreshDateTime()
+            //refreshDateTime()
             startVideo()
         }
 
-        clockView.text = timeFormat.format(Date())
-        context?.registerReceiver(tickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
+        //clockView.text = timeFormat.format(Date())
+        //context?.registerReceiver(tickReceiver, IntentFilter(Intent.ACTION_TIME_TICK))
         viewModel.aimyboxState.observe(viewLifecycleOwner, Observer(::onAimyboxStateChanged))
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        context?.unregisterReceiver(tickReceiver)
+        //context?.unregisterReceiver(tickReceiver)
     }
 
     private fun refreshDateTime() {
-        val now = Date()
-        clockView.text = timeFormat.format(now)
-        dateView.text = dateFormat.format(now)
+        //val now = Date()
+        //clockView.text = timeFormat.format(now)
+        //dateView.text = dateFormat.format(now)
     }
 
     private fun startVideo() {
@@ -82,19 +82,40 @@ class ScreensaverFragment: Fragment(R.layout.screensaver_layout) {
     }
 
     private fun onAimyboxStateChanged(state: Aimybox.State) {
+        println("ZZZZ_state.name="+state.name)
+
+        if(state.name=="SPEAKING" || state.name=="LISTENING")
+        {
+            println("ZZZZ_START_ANIMATION")
+            videoView.stopPlayback()
+            videoView.setVideoPath("android.resource://${context?.packageName}/${R.raw.background}")
+            videoView.setOnCompletionListener { it.start() }
+            videoView.start()
+        }
+
+        if(state.name=="STANDBY")
+        {
+            println("ZZZZ_SHOW_STATIC_PICTURE")
+            videoView.stopPlayback()
+            videoView.setVideoPath("android.resource://${context?.packageName}/${R.raw.background_static}")
+            videoView.setOnCompletionListener { it.start() }
+            videoView.start()
+        }
+
         togglePrompt(state)
     }
 
     private fun togglePrompt(state: Aimybox.State) {
         when (state) {
-            Aimybox.State.STANDBY -> promptView.animate().alpha(1f)
-            else -> promptView.animate().alpha(0f)
+
+            //Aimybox.State.STANDBY -> promptView.animate().alpha(1f) //1f
+            //else -> promptView.animate().alpha(0f) //0f
         }
     }
 
     inner class TickReceiver: BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            refreshDateTime()
+            //refreshDateTime()
         }
     }
 }

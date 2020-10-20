@@ -23,8 +23,10 @@ class AssistantApplication: Application(), CoroutineScope, SharedPreferences.OnS
 
     override val coroutineContext = Dispatchers.Main
 
+
     companion object {
         private const val YANDEX_API_KEY = "cc96633d-59d4-4724-94bd-f5db2f02ad13"
+        val unitId = UUID.randomUUID().toString()
     }
 
     val aimybox: Aimybox by lazy { Aimybox(createAimyboxConfig(this)) }
@@ -42,7 +44,7 @@ class AssistantApplication: Application(), CoroutineScope, SharedPreferences.OnS
         val apiKey = PreferenceManager.getDefaultSharedPreferences(this)
             .getString(Preferences.AIMYBOX_KEY, null) ?: ""
 
-        val unitId = UUID.randomUUID().toString()
+
 
         val speechToText = YandexSpeechToText(context, YANDEX_API_KEY)
 
@@ -54,10 +56,11 @@ class AssistantApplication: Application(), CoroutineScope, SharedPreferences.OnS
             arrayOf(getString(R.string.wakeup_phrase))
         )
 
-        val dialogApi = AimyboxDialogApi(apiKey, unitId,
+        val dialogApi = AimyboxDialogApi(apiKey, unitId, "https://bot-zaboty.herokuapp.com/aimy",
             customSkills = linkedSetOf(
                 DateTimeSkill(),
                 MusicSkill()
+
             ))
 
         return Config.create(speechToText, textToSpeech, dialogApi) {

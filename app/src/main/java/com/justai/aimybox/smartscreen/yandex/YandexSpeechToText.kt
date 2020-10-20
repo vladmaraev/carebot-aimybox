@@ -95,6 +95,7 @@ class YandexSpeechToText(context: Context, apiKey: String
 
         override fun onRecognizerError(p0: Recognizer, e: Error) {
             sendResult(Result.Exception(SpeechToTextException(e.message)))
+            println("ZZZZZZZZZZZZZZZZZ"+e.code)
         }
 
         override fun onSpeechDetected(p0: Recognizer) = onSpeechStart()

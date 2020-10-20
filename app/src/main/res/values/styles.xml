@@ -20,14 +20,22 @@
     </style>
 
     <style name="CustomAssistantButtonTheme" parent="DefaultAssistantTheme.AssistantButton">
-        <item name="aimybox_backgroundColor">@color/white</item>
-        <item name="aimybox_buttonExpandedColor">@color/white</item>
-        <item name="aimybox_buttonCollapsedColor">@color/white</item>
-        <item name="aimybox_buttonExpandedIconTint">@color/black</item>
-        <item name="aimybox_buttonCollapsedIconTint">@color/black</item>
-        <item name="aimybox_buttonSize">68dp</item>
+        <item name="aimybox_buttonElevation">6dp</item>
+        <item name="aimybox_buttonGravity">end|bottom</item>
+        <item name="aimybox_startRecordingDrawable">@drawable/icon_mic</item>
+        <item name="aimybox_stopRecordingDrawable">@drawable/icon_stop</item>
+
+        <item name="aimybox_backgroundColor">@android:color/holo_blue_dark</item>
+        <item name="aimybox_recordingAnimationColor">#7DD8E6</item>
+        <item name="aimybox_buttonExpandedColor">@android:color/holo_blue_dark</item>
+        <item name="aimybox_buttonCollapsedColor">@android:color/holo_blue_dark</item>
+        <item name="aimybox_buttonExpandedIconTint">@color/white</item>
+        <item name="aimybox_buttonCollapsedIconTint">@color/white</item>
+        <item name="aimybox_buttonSize">78dp</item>
         <item name="aimybox_buttonMarginEnd">15dp</item>
         <item name="aimybox_buttonMarginBottom">15dp</item>
+
+
     </style>
 
     <style name="CustomButtonReplyWidgetTheme" parent="DefaultAssistantTheme.Widget.ButtonReply">

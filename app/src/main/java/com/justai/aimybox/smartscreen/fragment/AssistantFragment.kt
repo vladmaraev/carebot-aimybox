@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ import com.justai.aimybox.model.reply.Reply
 import com.justai.aimybox.model.reply.TextReply
 import com.justai.aimybox.smartscreen.AssistantApplication
 import com.justai.aimybox.smartscreen.AssistantViewModel
+import com.justai.aimybox.smartscreen.HomeActivity
 import com.justai.aimybox.smartscreen.R
 import com.justai.aimybox.smartscreen.extensions.asWidget
 import com.justai.aimybox.smartscreen.extensions.isVideo
@@ -86,6 +88,8 @@ class AssistantFragment: Fragment(R.layout.assistant_layout), CoroutineScope {
         videoPlayer.addListener(videoListener)
         videoView.player = videoPlayer
 
+
+
         launch {
             viewModel.urlIntents.consumeEach {
                 context?.startActivityIfExist(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
@@ -125,7 +129,10 @@ class AssistantFragment: Fragment(R.layout.assistant_layout), CoroutineScope {
         val response = viewModel.response.value
         if (response?.question == true) {
             viewModel.aimybox.startRecognition()
+
         } else {
+            //viewModel.aimybox.startRecognition()
+
             viewModel.toggleAssistantView(false)
         }
     }
@@ -140,7 +147,7 @@ class AssistantFragment: Fragment(R.layout.assistant_layout), CoroutineScope {
 
     private fun showReply(reply: Reply) {
         when(reply) {
-            is TextReply -> showText(reply.asWidget)
+            //is TextReply -> showText(reply.asWidget)
             is ButtonsReply -> showButtons(reply.asWidget)
             is ImageReply -> showImage(reply.asWidget)
             else -> showNextReply()
@@ -152,7 +159,7 @@ class AssistantFragment: Fragment(R.layout.assistant_layout), CoroutineScope {
             playVideo(widget.url)
         } else {
             showImage(widget.url)
-            showNextReply()
+            //showNextReply()
         }
     }
 
@@ -169,9 +176,11 @@ class AssistantFragment: Fragment(R.layout.assistant_layout), CoroutineScope {
 
     private fun showImage(url: String) {
         Glide.with(this)
-            .load(url)
-            .into(imageView)
-    }
+                .load(url)
+                .into(imageView)
+            //println("ZZZ_URL IS NOT EMPTY=$url")
+        }
+
 
     private fun showText(widget: ResponseWidget) {
         layoutInflater

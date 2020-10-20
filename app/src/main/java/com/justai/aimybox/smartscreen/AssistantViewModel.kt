@@ -1,20 +1,24 @@
 package com.justai.aimybox.smartscreen
 
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.justai.aimybox.Aimybox
 import com.justai.aimybox.api.DialogApi
+import com.justai.aimybox.api.aimybox.AimyboxDialogApi
 import com.justai.aimybox.components.widget.*
 import com.justai.aimybox.model.Response
 import com.justai.aimybox.model.reply.ButtonsReply
 import com.justai.aimybox.model.reply.ImageReply
+import com.justai.aimybox.smartscreen.AssistantApplication.Companion.unitId
 import com.justai.aimybox.texttospeech.TextToSpeech
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.launch
+import java.util.*
 
 class AssistantViewModel(
     val aimybox: Aimybox
@@ -54,6 +58,9 @@ class AssistantViewModel(
         val response = responseInternal.value
 
         if (response?.question == false) {
+            println("ZZZ_onSpeechSequenceCompleted_question=false")
+            //val dialogApi = AimyboxDialogApi("cc96633d-59d4-4724-94bd-f5db2f02ad13", unitId, "https://bot-zaboty.herokuapp.com")
+            //dialogApi.send("", aimybox)
             toggleAssistantView(false)
         }
     }

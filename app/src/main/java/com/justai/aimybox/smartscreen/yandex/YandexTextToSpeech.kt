@@ -13,6 +13,7 @@ class YandexTextToSpeech(context: Context,
 
     companion object {
         private val BASE_URI = Uri.parse("https://tts.voicetech.yandex.net/generate")
+        //private val BASE_URI = Uri.parse("https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize")
     }
 
     override suspend fun speak(speech: TextSpeech) {
@@ -21,6 +22,7 @@ class YandexTextToSpeech(context: Context,
             .appendQueryParameter("format", "mp3")
             .appendQueryParameter("speaker", speaker)
             .appendQueryParameter("text", speech.text)
+            .appendQueryParameter("speed", "0.9")
             .build().toString()
 
         audioSynthesizer.play(AudioSpeech.Uri(uri))
